@@ -1,0 +1,1 @@
+export const GET_TOP_FILMS = 'GET_TOP_FILMS';
