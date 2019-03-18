@@ -8,28 +8,34 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {connect} from "react-redux";
 import {resetSelectedFilm, saveFilm} from "../../actions";
 
-class FormDialog extends React.Component {
+class FilmDialog extends React.Component {
 
   state = {
     film: {
-      Title: '',
-      Released: '',
+      Title: null,
+      Released: null,
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.selectedFilm && prevState.film.Title==='') {
+    if (nextProps.selectedFilm && prevState.film.Title === null) {
       return {...prevState, film: nextProps.selectedFilm}
     }
     return null
   }
 
+  resetState = () => {
+    this.setState({film: {Title: null}})
+  }
+
   handleClose = () => {
     this.props.resetSelectedFilm()
+    this.resetState()
   };
 
   handleSave = () => {
     this.props.saveFilm(this.state.film)
+    this.resetState()
   };
 
   handleChange = name => event => this.setState({
@@ -87,4 +93,4 @@ const mapStateToProps = state => ({
   selectedFilm: state.selectedFilm,
 })
 
-export default connect(mapStateToProps, {resetSelectedFilm, saveFilm})(FormDialog)
+export default connect(mapStateToProps, {resetSelectedFilm, saveFilm})(FilmDialog)
