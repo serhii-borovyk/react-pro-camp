@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import GridListTile from "@material-ui/core/GridListTile";
-import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from '@material-ui/icons/Info';
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import poster_none from "../static/poster_none.png";
 
@@ -18,10 +16,10 @@ const styles = {
   },
 };
 
-function FilmElement(props) {
-  const {film, classes, onClick} = props;
+const FilmElement = props => {
+  const {film, classes, handleClick} = props;
   return (
-    <GridListTile className={classes.gridListTile}>
+    <GridListTile onClick={() => handleClick(film)} className={classes.gridListTile}>
       <img src={film.Poster || poster_none} alt={film.Title}/>
       <GridListTileBar
         title={film.Title}
@@ -29,7 +27,7 @@ function FilmElement(props) {
       />
     </GridListTile>
   );
-}
+};
 
 FilmElement.propTypes = {
   classes: PropTypes.object.isRequired,

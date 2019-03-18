@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import {connect} from "react-redux";
+import {selectFilm} from "../actions";
 
 const styles = theme => ({
   root: {
@@ -19,12 +20,15 @@ const styles = theme => ({
 });
 
 const FilmList = props => {
-  const {filmList, classes} = props;
+  const {filmList, selectFilm, classes} = props;
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
         {filmList.map(film =>
-          <FilmElement key={film.imdbID} film={film}/>)
+          <FilmElement
+            key={film.imdbID}
+            film={film}
+            handleClick={selectFilm}/>)
         }
       </GridList>
     </div>
@@ -40,4 +44,4 @@ const mapStateToProps = state => ({
   filmList: state.filmList,
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(FilmList))
+export default connect(mapStateToProps, {selectFilm})(withStyles(styles)(FilmList))
