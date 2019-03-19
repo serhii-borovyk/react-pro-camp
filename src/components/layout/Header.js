@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-// noinspection ES6CheckImport
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -18,7 +17,7 @@ const styles = {
   },
 };
 
-function Header(props) {
+const Header = props => {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -34,7 +33,7 @@ function Header(props) {
       </AppBar>
     </div>
   );
-}
+};
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,

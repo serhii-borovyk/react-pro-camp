@@ -7,25 +7,26 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {connect} from "react-redux";
 import {resetSelectedFilm, saveFilm} from "../../actions";
+import PropTypes from "prop-types";
 
 class FilmDialog extends React.Component {
 
   state = {
     film: {
-      Title: null,
-      Released: null,
+      Title: "",
+      Released: "",
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.selectedFilm && prevState.film.Title === null) {
+    if (nextProps.selectedFilm && prevState.film.Title === "") {
       return {...prevState, film: nextProps.selectedFilm}
     }
     return null
   }
 
   resetState = () => {
-    this.setState({film: {Title: null}})
+    this.setState({film: {Title: ""}})
   }
 
   handleClose = () => {
@@ -88,6 +89,12 @@ class FilmDialog extends React.Component {
     );
   }
 }
+
+FilmDialog.propTypes = {
+  selectedFilm: PropTypes.object,
+  resetSelectedFilm: PropTypes.func.isRequired,
+  saveFilm: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   selectedFilm: state.selectedFilm,
