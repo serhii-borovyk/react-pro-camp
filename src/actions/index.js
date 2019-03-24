@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const getFilms = () => ({
   type: GET_FILMS,
-  payload: axios.get('http://www.omdbapi.com/?apikey=792db8bc&s=marvel')
+  payload: axios.get('https://www.omdbapi.com/?apikey=792db8bc&s=marvel')
 })
 
 export const selectFilm = selectedFilm => ({
