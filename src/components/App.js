@@ -1,14 +1,11 @@
 import React from 'react';
-
-import FilmList from "../containers/FilmList";
 import Header from "./layout/Header";
-import FilmDialog from "../containers/dialogs/FilmDialog";
+import Main from "./main/Main";
 
 const App = () => (
   <div className="App">
     <Header/>
-    <FilmList/>
-    <FilmDialog/>
+    <Main/>
   </div>
 );
 

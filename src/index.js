@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import reducer from "./reducers";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {createMuiTheme} from "@material-ui/core";
+import thunk from 'redux-thunk';
+import promise from 'redux-promise';
+
 
 const theme = createMuiTheme({
   palette: {type: 'dark'},
@@ -14,7 +17,9 @@ const theme = createMuiTheme({
 
 const store = createStore(
   reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  compose(
+    applyMiddleware(...[thunk, promise]),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 );
 
 ReactDOM.render(

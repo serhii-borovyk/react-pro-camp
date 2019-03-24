@@ -11,22 +11,15 @@ import PropTypes from "prop-types";
 
 class FilmDialog extends React.Component {
 
-  state = {
-    film: {
-      Title: "",
-      Released: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      film: this.props.initialFilm
     }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.selectedFilm && prevState.film.Title === "") {
-      return {...prevState, film: nextProps.selectedFilm}
-    }
-    return null
   }
 
   resetState = () => {
-    this.setState({film: {Title: ""}})
+    this.setState({film: null})
   }
 
   handleClose = () => {
@@ -47,12 +40,11 @@ class FilmDialog extends React.Component {
   })
 
   render() {
-    const {selectedFilm} = this.props;
     const {film} = this.state;
     return (
       <div>
         <Dialog
-          open={!!selectedFilm}
+          open={!!film}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
@@ -70,10 +62,10 @@ class FilmDialog extends React.Component {
             <TextField
               autoFocus
               margin="dense"
-              id="Released"
-              label="Released"
-              value={film.Released}
-              onChange={this.handleChange('Released')}
+              id="Year"
+              label="Year"
+              value={film.Year}
+              onChange={this.handleChange('Year')}
             />
           </DialogContent>
           <DialogActions>
@@ -91,13 +83,9 @@ class FilmDialog extends React.Component {
 }
 
 FilmDialog.propTypes = {
-  selectedFilm: PropTypes.object,
+  defaultFilm: PropTypes.object,
   resetSelectedFilm: PropTypes.func.isRequired,
   saveFilm: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  selectedFilm: state.selectedFilm,
-})
-
-export default connect(mapStateToProps, {resetSelectedFilm, saveFilm})(FilmDialog)
+export default connect(null, {resetSelectedFilm, saveFilm})(FilmDialog)

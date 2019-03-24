@@ -1,4 +1,7 @@
-export const GET_TOP_FILMS = 'GET_TOP_FILMS';
+export const GET_FILMS = 'GET_FILMS';
+export const GET_FILMS_SUCCESS = 'GET_FILMS_SUCCESS';
+export const GET_FILMS_ERROR = 'GET_FILMS_ERROR';
+
 export const RESET_SELECTED_FILM = 'RESET_SELECTED_FILM';
 export const SELECT_FILM = 'SELECT_FILM';
 export const SAVE_FILM = 'SAVE_FILM';

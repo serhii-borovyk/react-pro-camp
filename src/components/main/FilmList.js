@@ -1,10 +1,8 @@
 import React from "react";
-import FilmElement from "../components/FilmElement";
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import {connect} from "react-redux";
-import {selectFilm} from "../actions";
+import FilmElement from "./FilmElement";
 
 const styles = theme => ({
   root: {
@@ -17,7 +15,7 @@ const styles = theme => ({
 });
 
 const FilmList = props => {
-  const {filmList, selectFilm, classes} = props;
+  const {filmList, classes} = props;
   return (
     <div className={classes.root}>
       <GridList>
@@ -25,7 +23,7 @@ const FilmList = props => {
           <FilmElement
             key={film.imdbID}
             film={film}
-            handleClick={selectFilm}/>)
+          />)
         }
       </GridList>
     </div>
@@ -35,11 +33,6 @@ const FilmList = props => {
 FilmList.propTypes = {
   classes: PropTypes.object.isRequired,
   filmList: PropTypes.array.isRequired,
-  selectFilm: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  filmList: state.filmList,
-})
-
-export default connect(mapStateToProps, {selectFilm})(withStyles(styles)(FilmList))
+export default withStyles(styles)(FilmList)

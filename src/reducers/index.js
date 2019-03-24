@@ -1,14 +1,13 @@
 import * as types from "../types";
-import {filmList} from "../store";
 
 const initialState = {
-  filmList,
+  filmList: [],
   selectedFilm: null
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_TOP_FILMS:
+    case types.GET_FILMS_SUCCESS:
       return {...state, filmList: action.payload}
     case types.SELECT_FILM:
       return {...state, selectedFilm: action.payload}
