@@ -1,10 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './components/App';
+import { Provider } from "react-redux";
+import { applyMiddleware, compose, createStore } from "redux";
+import reducer from "./reducers";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { createMuiTheme } from "@material-ui/core";
+import thunk from 'redux-thunk';
+import promise from 'redux-promise-middleware'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const theme = createMuiTheme({
+  palette: {type: 'dark'},
+  typography: {useNextVariants: true},
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+const store = createStore(
+  reducer,
+  compose(
+    applyMiddleware(...[thunk, promise]),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <App/>
+    </MuiThemeProvider>
+  </Provider>,
+  document.getElementById('root')
+);
