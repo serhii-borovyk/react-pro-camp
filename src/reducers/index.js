@@ -9,6 +9,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case types.GET_FILMS_FULFILLED:
       return {...state, filmList: action.payload.data.Search}
+    case types.GET_FILMS_FULFILLED:
+      return {...state, selectedFilm: state.filmList.filter(e=>e.imdbID===action.payload)}
     case types.SELECT_FILM:
       return {...state, selectedFilm: action.payload}
     case types.SAVE_FILM:

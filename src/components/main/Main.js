@@ -1,31 +1,17 @@
 import React, { Component, Fragment } from "react";
-import FilmList from "./FilmList";
-import FilmDialog from "../dialogs/FilmDialog";
-import { connect } from "react-redux";
-import { getFilms } from "../../actions";
+import Dashboard from "../../pages/Dashboard";
+import { Switch, Route } from 'react-router-dom'
+import EditFilm from "../../pages/EditFilm";
 
 class Main extends Component {
-
-  componentDidMount() {
-    this.props.getFilms()
-  }
-
   render() {
-    const {filmList, selectedFilm} = this.props
     return (
-      <Fragment>
-        <FilmList filmList={filmList}/>
-        {selectedFilm &&
-          <FilmDialog initialFilm={selectedFilm}/>
-        }
-      </Fragment>
+      <Switch>
+        <Route path='/' component={Dashboard}/>
+        <Route path='/film/:id/edit' component={EditFilm}/>
+      </Switch>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  filmList: state.filmList,
-  selectedFilm: state.selectedFilm,
-})
-
-export default connect(mapStateToProps, {getFilms})(Main)
+export default Main
